@@ -1,0 +1,72 @@
+def search_linear(alist, item):
+    
+    for i in range(len(alist)):
+        if item == alist[i]:
+            return (i)
+    return -1
+
+def search_binary(xs, target):
+    lb = 0  #下界限
+    ub = len(xs)-1 #上界限
+    
+    while True:
+        if lb == ub: #寻找结束  
+           return -1
+
+        mid_index = (lb + ub) // 2 #中间值
+
+        item_at_mid = xs[mid_index]#中间值对应的元素
+
+        if item_at_mid == target:
+            return mid_index      # Found it!
+        elif item_at_mid < target:
+            lb = mid_index+1      # Use upper half of ROI next time
+        else:
+            ub = mid_index    
+
+def find_unknown_words(vocab, wds):
+    result = []
+    for i in wds:
+        if (search_binary(vocab, i) == -1):
+            result.append(i)
+    return result
+
+def load_words_from_file(filename):
+    f = open(filename, "r")
+    file_content = f.read().splitlines()
+    f.close()
+    wds = file_content
+    return wds
+
+def text_to_words(the_text):
+    my_substitutions = the_text.maketrans(
+      # If you find any of these
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&()*+,-./:;<=>?@[]^_`{|}~'\\",
+      # Replace them by these
+      "abcdefghijklmnopqrstuvwxyz                                          ")
+
+    # Translate the text now.
+    cleaned_text = the_text.translate(my_substitutions)
+    wds = cleaned_text.split()
+    return wds
+
+def get_words_in_book(filename):
+    """ Read a book from filename, and return a list of its words. """
+    f = open(filename, "r")
+    content = f.read()
+    f.close()
+    wds = text_to_words(content)
+    return wds
+
+
+
+
+book_words = get_words_in_book("AliceInWonderland.txt")
+
+vocab = get_words_in_book("vocab.txt")
+
+unknown_words=find_unknown_words(vocab,book_words)
+print('there are',len(book_words),'words in the book',book_words[:100])
+print('there are',len(set(unknown_words)),'unknown_words')
+
+
