@@ -14,10 +14,10 @@ a = np.array([[80,80,255,80,80,255,80,80],
 
 #task1
 def liten_the_image(ar):
-    ar=ar*1.1
     for i in ar:
-        if i == 255:
-            return True
+        for z in i:
+            if z == 255:
+                z=z*1.1
 #task2        
 def flip_the_image1(ar):#method1
     flip = ar[:,range(ar.shape[1]-1,-1,-1)]
