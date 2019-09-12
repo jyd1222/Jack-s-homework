@@ -1,0 +1,19 @@
+#1
+file=open('qbdata.txt','r')
+a=file.readlines()
+name=[]
+score=[]
+for i in a:
+    space=0#空格数
+    n=0#计数
+    for j in i:
+        n+=1
+        if j==' ':
+            space+=1
+        if space==2:
+            print(i[:n]+'has a rating of '+i[-5:])
+            break
+    
+a=file.close()
+
+#2
