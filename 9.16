@@ -1,0 +1,66 @@
+file=open('grade.txt','w')
+name=['Daniel Chu  ','Harry Fang  ','Nico Jiang  ','Jack Jin    ','James Liu   ','Brian Shan  ',
+      'Tim Xing    ','Lisa Xu     ','Cathy Yang  ','Julian Ye   ','Shirley Zeng','Andy Zhang  ']
+
+import random
+Mathgrade=[]  
+CSgrade=[]
+PHYgrade=[] 
+for i in range(12):#随机生成成绩
+    Mathgrade.append(random.randint(80,100))
+    CSgrade.append(random.randint(80,100))
+    PHYgrade.append(random.randint(80,100))
+    
+first_line='Name        Math CS PHY'
+file.write(first_line+'\n')
+
+for j in range(12):#写入数据
+    person=(name[j]+' '+str(Mathgrade[j])+' '+str(CSgrade[j])+' '+str(PHYgrade[j]))
+    
+    file.write(person+'\n')
+      
+a=file.close()
+
+
+#Q2
+
+file=open('grade.txt','r')
+file2=open('Q2.txt','w')#打开一个新文件
+n=0
+line1=file.readline()
+file2.write(line1)
+for i in range(12):#加序号
+    n=n+1
+    newline=str(n)+file.readline()
+    file2.write(newline)
+    
+    
+    
+    
+file.close()
+file2.close()
+
+#Q3
+
+
+file=open('grade.txt','r')
+file3=open('Q3.txt','w')
+line1=file.readline()
+file3.write(line1+' ave')
+for i in range(12):
+    line=file.readline()
+    math=int(line[13:15])
+    cs=int(line[16:18])
+    phy=int(line[19:])
+    average=round((math+cs+phy)/3,1)
+    newline='{}{}{}{}'.format(line[:-1],' ',average,'\n')
+    print(newline)
+    file3.write(newline)
+    
+
+file.close()
+file3.close()
+
+
+
+
