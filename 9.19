@@ -1,4 +1,5 @@
 #q1
+#char,new of type String
 char=str(input('please input a character: '))
 file=open('qb.txt','r')
 file1=open('q1.txt','w')
@@ -25,6 +26,8 @@ a.close()
 b.close()
         
 #q2
+#code,i, of type Integer
+#new of type String
 name=str(input('please input a name: '))
 file=open('qbdata.txt','r')
 file2=open('q2.txt','w')
@@ -39,7 +42,8 @@ for i in range(34):
 file.close()
 file2.close()
 
-#q3    
+#q3  
+#n,i of type Integer
 code=str(input('please input a code: '))
 file=open('q2.txt','r')
 n=0
