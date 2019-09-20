@@ -1,0 +1,20 @@
+#symbol of type String
+#maxnum,num_symbols,num_space,i of type Integer
+
+symbol=input('input a symbol: ')
+maxnum=int(input('input max number of symbol(odd): '))
+
+while maxnum%2!=1:
+    maxnum=int(input('input max number of symbol(odd): '))
+num_symbol=1
+num_space=(maxnum-1)//2
+   
+while num_symbol<=maxnum:
+    
+    for i in range(num_space):
+        print(' ',end='')
+    for i in range(num_symbol):
+        print(symbol,end='')
+    print('')
+    num_space-=1
+    num_symbol+=2
