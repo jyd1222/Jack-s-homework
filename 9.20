@@ -18,3 +18,22 @@ while num_symbol<=maxnum:
     print('')
     num_space-=1
     num_symbol+=2
+
+
+
+
+symbol=input('input a symbol: ')
+maxnum=int(input('input max number of symbol(odd): '))
+num_space=maxnum//2
+space=' '*num_space
+print(space+symbol)
+mid=1
+num_space-=1
+for i in range(maxnum//2-1):
+    
+    print(' '*num_space+symbol+mid*' '+symbol)
+    mid+=2
+    num_space-=1
+   
+
+print(symbol*maxnum)
