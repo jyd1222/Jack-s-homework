@@ -1,0 +1,94 @@
+#Initialise Board
+board=[['s']*7 for i in range(6) ]
+
+    
+#SetUpGame
+ThisPlayer='o'
+GameFinished=False
+WinnerFound=False
+
+#OutputBoard
+print(board)
+
+#####
+
+def ColumnNumberValid():   
+    
+    Valid=False
+    if 1<=ColumnNumber<=7:
+        for i in range(5,-1,-1):
+            if board[i][ColumnNumber-1]=='s':        
+                Valid=True
+                break
+    return Valid
+
+def ThisPlayerChoosesColumn():
+    global ColumnNumber
+    print("Player "+ThisPlayer+" 's turn")
+    ColumnNumber=int(input('Enter a valid column number: '))
+    while ColumnNumberValid() == False:
+        ColumnNumber=int(input('Enter a valid column number: '))
+        ColumnNumberValid()
+    
+    
+    return ColumnNumber-1
+
+
+
+def FindNextFreePositioninColumn():
+    ThisRow=5
+    while board[ThisRow][ValidColumn] != 's':
+        ThisRow-=1
+    return ThisRow
+
+
+def SwapThisPlayer():
+    global ThisPlayer
+    if ThisPlayer=='o':
+        ThisPlayer='x'
+    else:
+        ThisPlayer='o'
+    
+
+while WinnerFound==False:
+    
+    #ThisPlayerMakesMove
+    ValidColumn=int(ThisPlayerChoosesColumn())
+    ValidRow=FindNextFreePositioninColumn()
+    board[ValidRow][ValidColumn]=ThisPlayer
+    
+    for i in board:
+        print(i)
+        
+    SwapThisPlayer()
+    
+    #CHECK
+    check=ThisPlayer*4
+    #CheckRow
+    for i in range(6):
+        row=''.join(board[i])
+        if check in row:
+            WinnerFound=True
+    #CheckColumn
+    column=''
+    for j in range(6):
+        for i in board:
+            column+=(str(i[j]))
+            if check in column:
+                WinnerFound=True
+    #CheckDiagnal
+    diagnal_left1=''
+    diagnal_left2=''
+    diagnal_right1=''
+    diagnal_right2=''
+    for i in range(6):
+        diagnal_left1+=(str(board[i][i]))
+        diagnal_left2+=(str(board[i][i+1]))
+        diagnal_right1+=(str(board[i][6-i]))
+        diagnal_right2+=(str(board[i][5-i]))
+    if check in diagnal_left1 or check in diagnal_left2 or check in diagnal_right1  or check in diagnal_right2:
+        WinnerFound=True            
+    
+print('winner is',ThisPlayer)    
+    
+ 
