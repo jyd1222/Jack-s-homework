@@ -1,0 +1,91 @@
+def SetUpEmptyGrid():
+    global grid
+    grid=[[0 for i in range(8)]for i in range(8)]
+    
+
+
+
+def GetEmptyGridPosition():
+    import random
+    global x,y
+    while True:
+        x=random.randint(0,7)
+        y=random.randint(0,7)
+        if grid[x][y]==0:
+            break
+    
+    
+
+
+def RandomlyDistributeCards():
+    for number in range(32):
+        GetEmptyGridPosition()
+        grid[x][y]=number+1
+        GetEmptyGridPosition()
+        grid[x][y]=number+1
+   
+        
+def SetUpPlayers():  
+    global points, ThisPlayer
+    points=[0,0]
+    ThisPlayer=0
+    
+def GetPlayerCoordinates():
+    global x1,y1,x2,y2
+    for i in grid:
+        print(i)
+    while True:
+        x1=int(input('x1: '))-1
+        y1=int(input('y1: '))-1
+        if grid[x1][y1]>0:
+            break
+    while True:
+        x2=int(input('x2: '))-1
+        y2=int(input('y2: '))-1
+        if grid[x2][y2]>0:
+            break    
+def DisplayGrid():
+    for i in range(8):
+        for j in range(8):
+            if i==x1 and j==y1:
+                print(grid[i][j])
+            elif grid[i][j]==0:
+                print('0')
+            else:
+                print('?')
+def SwapPlayers():
+    global ThisPlayer
+    if ThisPlayer==0:
+        ThisPlayer=1
+    else:
+        ThisPlayer=0
+               
+def TestForMatch():
+    if grid[x1][y1]==grid[x2][y2]:
+        grid[x1][y1]=0
+        grid[x2][y2]=0
+        points[ThisPlayer]+=1
+    else: 
+        SwapPlayers()
+               
+
+def TestForEndGame():
+    global points
+    global GameEnd
+    if points[0]+points[1]==32:
+        GameEnd=True
+    
+def OutputResults():
+    print('player1: ',points[0])
+    print('player2: ',points[1])
+    
+SetUpEmptyGrid()
+RandomlyDistributeCards()
+SetUpPlayers()
+GameEnd=False
+while GameEnd==False:
+    GetPlayerCoordinates()
+    
+    TestForMatch()
+    TestForEndGame()
+OutputResults()
