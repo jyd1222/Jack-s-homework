@@ -1,0 +1,35 @@
+Code:
+import matplotlib as plt
+import numpy as np
+import seaborn as sns
+
+
+
+a = np.array([[80,80,255,80,80,255,80,80],
+              [80,80,255,80,80,255,80,80],
+              [255,80,120,120,120,120,255,80],
+              [255,80,255,255,255,255,80,80],
+              [255,80,120,120,120,120,80,80]])
+
+
+#task1
+def liten_the_image(ar):
+    for i in ar:
+        for z in i:
+            if z == 255:
+                z=z*1.1
+#task2        
+def flip_the_image1(ar):#method1
+    flip = ar[:,range(ar.shape[1]-1,-1,-1)]
+    heatmap=sns.heatmap(flip,vmin=0,vmax=255)
+    
+def flip_the_image(ar):#method2 
+    col=a.shape[1]    
+    for m in a:
+        for j in range(col // 2):
+            m[j], m[col-1-j] = m[col-1-j], m[j]
+    heatmap=sns.heatmap(a,annot=True,vmin=0,vmax=255) 
+    
+#task3
+def clip_the_image(maxval):
+    vmax=maxval

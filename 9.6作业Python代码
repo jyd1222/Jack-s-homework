@@ -1,0 +1,72 @@
+#p151 Q1
+for i in range(11,2,-1):
+    
+    digit = int(input('digit: '))
+    total = total + i * digit
+    
+checkdigit = 11 - total // 11
+
+if checkdigit==10:
+    
+    checkdigit = 'X'
+print('checkdigit:',checkdigit)
+
+#Q2
+positive_count = 0
+negative_count = 0
+
+while True:
+    number = eval(input('number: '))
+    if number > 0:
+        positive_count += 1
+        
+    elif number < 0:
+        negative_count += 1
+    
+    else: 
+        break
+    
+    
+#Q3
+total = 0
+count = 0  
+rogue_value = -1 
+number = eval(input('number: '))
+while number != rogue_value:
+    
+    count += 1
+    total += number
+    number = eval(input('number: '))
+if count > 0:
+    average = total / count
+    print(average)
+    
+    
+#Q4
+UserList = list(input('UserList'))
+PassWordList = list(input('PassWordList'))
+MyUserID = str(input('MyUserID:'))
+MyPassWord = str(input('MyPassWord:'))
+UserIdFound = False
+LoginOK = False
+
+
+for i in range(20):
+    if UserList[i] == MyUserID:
+        UserIdFound = True
+        if PassWordList[i] == MyPassWord:
+           LoginOK = True
+if LoginOK == True:
+    print('Login successful')
+else:
+    print('User ID and/or password incorrect')
+    
+#卷子
+Lookup = list(input('lookup: '))
+Startpos = int(input('Start position: '))
+NumToChange = int(input('Number To Change: '))
+n=0
+for i in range(NumToChange):
+    NewChar = input('new character: ')
+    Lookup[Startpos] = NewChar
+    startpos += 1

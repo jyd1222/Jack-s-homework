@@ -1,0 +1,49 @@
+# 编程作业 -- 上传github
+#a. 试卷第二题
+#b. 书上211页，共三题，全部用python实现
+
+#1
+print('Ounces Grams')
+for i in range(1,30):
+    Grams = round(i*28.35)
+    print('Ounces=',i,'Grams=',Grams)
+    
+#2
+UserID = input('user ID: ')
+upercase = 0
+digit = 0
+for i in UserID:
+    if 65<=ord(i)<=90:
+        upercase += 1
+    elif 0 <=int(i)<= 9:
+        digit += 1
+   
+if upercase == 3 and digit == 4:
+    print('valid user ID')
+else:
+    print('invalid user ID')
+
+#3
+games=0
+sports=0
+programing=0
+watchingTV=0
+Tally = [['reading','games','sports','programing','watchingTV'],[0,0,0,0,0]]
+like=1
+while like!=0:
+    like=int(input('what do you like: '))
+    if like==1:
+        Tally[1][0]+=1
+    elif like == 2:
+        Tally[1][1]=1
+    elif like ==3:
+        Tally[1][2]+=1
+    elif like==4:
+        Tally[1][3]+=1
+    elif like==5:
+        Tally[1][4]+=1
+for i in range(5):
+   print(Tally[0][i],Tally[1][i])
+   
+f= open("9.9HK.txt","w+")
+f.write()
