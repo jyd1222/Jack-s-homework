@@ -1,0 +1,41 @@
+a={'A':10,'B':11,'C':12,'D':13,'E':14,'F':15,'G':16}#大于十进制的数字
+m=int(input('beforetype: '))#初始进制
+n=int(input('aftertype: '))#转换后的进制
+d=input('digit: ')#输入一个数
+ten=0#初始化十进制数作为中间量
+for i in range(len(d)):#第一次循环将初始进制转换为十进制
+    if d[i] in a:
+        key=d[i]
+        ten=ten+a[key]*m**(len(d)-i-1)
+    else:
+        ten=ten+int(d[i])*m**(len(d)-i-1)
+        
+
+str1=''
+while ten!=0:#十进制转换为其他进制
+    digit=ten%n
+    ten=ten//n
+    if digit>=10:#如果大于等于十进制
+        for j in a:
+            if a[j]==digit:                
+                digit=j
+                str1+=digit
+    else:#小于十进制
+        str1+=str(digit)
+    
+str1=list(str1)#翻转
+str1.reverse() 
+str1=''.join(str1)
+print(str1)   
+
+    
+    
+      
+    
+    
+        
+    
+
+
+   
+    
