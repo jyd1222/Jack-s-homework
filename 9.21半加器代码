@@ -1,0 +1,63 @@
+def NOT(a):
+    if a==0:
+        return 1
+    return 0
+
+def AND(a,b):
+    if a==1:
+        if b==1:
+            return 1
+    return 0
+
+def OR(a,b):
+    if a==0:
+        if b==0:
+            return 0
+    return 1
+
+def NAND(a,b):
+    if a==1: 
+        if b==1:
+            return 0
+    
+    return 1
+    
+def NOR(a,b):
+    if a==0:
+        if b==0:
+            return 1
+    return 0
+    
+def XOR(a,b):
+    if a!=b:
+        return 1
+    else:
+        return 0
+    
+def full_adder(num1,num2):
+    
+    c=0
+    num1=num1[::-1]
+    num2=num2[::-1]
+    outcome=''
+        
+    for i in range(len(num1)):
+        digit1=int(num1[i])
+        digit2=int(num2[i])
+        if c==0:
+            s=XOR(digit1,digit2)
+            c=AND(digit1,digit2)       
+            
+        else:
+            s=1-XOR(digit1,digit2)   
+            c=OR(digit1,digit2)
+           
+        outcome+=str(s)
+    
+    outcome=outcome[::-1]
+    print(outcome)
+    print('c= ',c)
+
+m=input('1: ')
+n=input('2: ') 
+full_adder(m,n)    
