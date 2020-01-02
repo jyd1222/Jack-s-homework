@@ -1,0 +1,40 @@
+def StringClean(InString):
+    OutString=''
+    for i in InString:
+        if 'A'<=i<='Z':
+            low=chr(ord(i)+32)
+            OutString+=low
+        elif 'a'<=i<='z': 
+            OutString+=i
+    return OutString
+
+
+
+def CheckSensor():
+    SensorID=input('input sensor ID: ')
+    lowtemp=eval(input('low: '))
+    hightemp=eval(input('high: '))
+    while SensorID>10 or SensorID<1:
+        SensorID=input('input sensor ID: ')
+        temp=GetTemp(SensorID)
+        if temp < lowtemp:
+            return 'Cold'
+        elif temp>hightemp:
+            return 'Hot'
+        else: 
+            return 'Normal' 
+
+
+def AddNewScores():
+    file=open('ScoreDetails.txt','a')
+    date=input('input date: ')
+    while membership_num!='':
+        membership_num=input('membership number: ')
+        score=input('score: ')
+        while score<50 or score>99:
+            score=input('score: ')
+        line=membership_num+date+score
+        file.write(line)
+        
+        
+    
