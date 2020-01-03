@@ -36,5 +36,26 @@ def AddNewScores():
         line=membership_num+date+score
         file.write(line)
         
+ def Lighten(image):
+    burnflag=False
+    for i in range(8):
+        for j in range(8):
+            image[i][j]=int((image[i][j])*1.1)
+            if image[i][j]>=255:
+                image[i][j]=255
+                bunflag=True
+    return burnflag            
+            
+def ProcessMarks(marks):
+    total=0
+    highest=0
+    for i in marks:
+        total+=i
+        if i>highest:
+            highest=i
+    mean=total/20
+    return mean,highest
+
+        
         
     
