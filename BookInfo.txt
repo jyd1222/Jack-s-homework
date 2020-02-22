@@ -1,0 +1,38 @@
+def Q1():
+    f=open('BookInfo.txt','r')
+    number=1
+    while number<=21:
+        line=f.readline()
+        
+        for i in range(len(line)):
+            if line[i]==',':
+               BookAuthor=line[:i-1] 
+               BookTitle=line[i+1:]
+        if number<10:
+            print('#0'+str(number)+' book author: '+BookAuthor+',book title: '+BookTitle)
+        else:
+            print('#'+str(number)+' book author: '+BookAuthor+',book title: '+BookTitle)
+    
+        number+=1
+def Q2():
+    f1=open('BookInfo_ne.text','w')
+    f2=open('BookInfo.txt','r')
+    number=1
+    while number<=21:
+        line=f2.readline()
+        for i in range(len(line)):
+            if line[i]==' ':
+                NumberOfCoppy=ord(line[i+1])
+        for i in range(len(line)):
+            if line[i]==',':
+               BookTitle=line[i+1:len(line)-1]
+        if number<10:
+            new='#0'+str(number)+BookAuthor+',book title: '+BookTitle+',number of copies: '+str(NumberOfCoppy)
+        else:
+            new='#'+str(number)+BookAuthor+',book title: '+BookTitle+',number of copies: '+str(NumberOfCoppy)
+        print(new)
+        f2.write(new)
+        number+=1
+Q2()
+             
+
