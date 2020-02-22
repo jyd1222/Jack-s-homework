@@ -1,0 +1,62 @@
+#[s16-23-Q3]
+def Decrypt(CipherChar,lookup):
+    index=0
+    found=False
+    while found==False:
+        if Loopup[index]==CipherChar:
+            found=True
+        else:
+            index+=1
+    OriginalChar=chr(index)
+    return OriginalChar
+def OutputLookup():
+    StartIndex=int(input('Start Index:'))
+    NumberToOutput=int(input('Number To Output:'))
+    Index=StartIndex
+    for i in range(NumberToOutput):
+        OriginalChar=chr(lookup[index-1])
+        CipherChar=lookup[index-1]
+        print('Index',Index,': Character',CipherChar,'has substitute character',OriginalChar)
+        Index+=1
+#[w17-21-Q3]
+def BubbleSort():
+    bondery=99
+    for i in range(99):
+        for j in range(bondery):
+            ThisID=UserNameArray[j]
+            NextID=UserNameArray[j+1]
+            if ThisID>NextID:
+                temp=NextID
+                NextID=ThisID
+                ThisID=temp
+            bondery-=1
+def(FindRepeats):
+    global UserNameArray
+    count=0 
+    for i in range(100):
+        ThisUser=UserNameArray[i]
+        NextUser=UserNameArray[i+1]
+        if ThisUser[:6]==NextUser[:6]
+        count+=1
+        print(NextUser)
+    if count=0:
+        print('The array contains not repeated UserID')
+    else:
+        print('There are'),count,'repeated UserID')
+    
+    
+
+#[s19-21-Q3]
+TotalValue=0
+ZeroCount=0
+for i in range(100):
+    if result[i]==0:
+        ZeroCount+=1
+    else TotalValue+=result[i]
+Average=TotalValue/100
+print('average value is:',Average)
+print('number of zero value:',ZeroCount)
+
+
+
+
