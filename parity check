@@ -1,0 +1,24 @@
+def odd_parity(a):
+    error_row=0
+    error_column=0
+
+    for i in range(8):
+        column_count=0
+        row_count=0
+        
+        for j in range(8):
+            row_count+=a[i][j]
+            column_count+=a[j][i]
+        if column_count%2==0:
+            error_column=i
+        if row_count%2==0:
+            error_row=i
+    return(error_row,error_column)
+        
+            
+        
+    
+        
+            
+            
+            
