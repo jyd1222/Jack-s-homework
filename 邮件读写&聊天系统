@@ -1,0 +1,147 @@
+import websockets
+import asyncio
+
+cs=set()
+async def talk(websocket, path):
+    try:
+        while True:
+            if (not websocket in cs):
+                cs.add(websocket)
+                msg='欢迎:'+str(websocket.remote_adress)
+            else:
+                msg=str(websocket.remote_adress)+'说'+str(await websocket.recv())
+            await asyncio.wait([ws.send(msg) for ws in cs])
+    except Exception as err:
+        cs.remoce(websocket)
+        
+start_server = websockets.serve(talk, '192.168.0.100', 8765)
+asyncio.get_event_loop().run_until_complete(start_server)
+asyncio.get_event_loop().run_forever()
+
+
+<html>
+    <input id='host' value='192.168.0.100'></input>
+    <button ondblclick="con()">连接</button>
+    <br/><br/>
+    <input id='msg'></input>
+    <button onclick='send()'>发送</button>
+    <div id="output"></div>
+    <script>
+        function con()
+        {
+            ws = new WebSocket('ws://'+host.value+':8765/')
+            ws.onopen = function(evt) {writeToScreen('CONNECTED!')};
+            ws.onmessage = function(evt) {writeToScreen('evt.data');};
+        }
+        function send()
+        {
+            message = msg.value;
+            ws.send(message);
+        }
+
+        function writeToScreen(message)
+        {
+        var pre = document.createElement('P');
+        pre.innerHTML = message;
+        output.appendChild(pre);
+        }
+    </script>
+
+</html>
+
+
+
+
+
+
+from poplib import POP3
+from email.parser import Parser
+from email.header import decode_header
+from email.utils import parseaddr
+
+
+#################################邮箱信息###########################
+email = "m18911183995_1@163.com"
+password = "VVAQABTWCXAEZCVD"
+pop3_server = "pop.163.com"
+server = POP3(pop3_server)                        #连接到POP3服务器
+
+################################邮箱解析############################
+value = ['','','']
+def printMsg(msg):
+	global value 
+	i = 0
+	for header in ['From', 'To', 'Subject']:      #解析邮件头
+		value[i] = msg.get(header, '')
+		if value[i]:
+			if header == 'Subject':                 #解析主题
+				value[i] = decode_str(value[i])
+			else:
+				hdr, addr = parseaddr(value[i])
+				name = decode_str(hdr)
+				value[i] = u'%s <%s>' % (name, addr)
+		i = i+1
+
+def decode_str(s):
+	value, charset = decode_header(s)[0]
+	if charset:
+		value = value.decode(charset)
+	return value
+####################################################################
+#server.set_debuglevel(1)                                #开闭调试信息
+#print (server.getwelcome().decode('utf-8'))              #打印欢迎信息
+server.user(email)                                       #身份认证邮箱地址
+server.pass_(password)                                   #身份认证,邮箱密码
+
+emailNum, size = server.stat()
+print ("Messages: %s. size: %s" % (emailNum, size))      #返回邮箱的数量和占用空间
+resp, mails, octets = server.list()                      #返回所有邮箱的编号  
+index = len(mails)                                       #获取最新的一封邮件, 索引从1开始
+
+resp, lines, octets = server.top(index,0)                #只获取邮箱的头
+
+msg_content = b'\r\n'.join(lines).decode('utf-8')        #每一行加入换行,并转化为UTF-8类型
+msg = Parser().parsestr(msg_content)                     #把邮件内容解析成Message对象
+
+printMsg(msg)
+
+print (value)
+
+#server.dele(index)                                      #可以根据索引号从服务器删除邮件
+server.quit()                                            #关闭连接
+
+
+
+import poplib
+from email import parser
+from email.header import decode_header
+
+
+server = poplib.POP3_SSL("pop.163.com","995")
+server.user("m18911183995_1@163.com")
+server.pass_("VVAQABTWCXAEZCVD") #replace with your authrization code ---
+
+resp, mails, octets = server.list()
+print("邮件总数： %d" % len(mails))
+
+for index in range(len(mails)):
+    resp, lines, octets = server.retr(index+1)
+    msg_content = b"\r\n".join(lines).decode('utf-8')
+    msg = parser.Parser().parsestr(msg_content)
+    emailbase = {}
+
+    for line in msg.items():
+        header = line[0]
+        if header in ['from', 'subject','date']:
+            item= decode_header(line[1])[-1]
+            code = item[1] if item[1]!= None else 'ascii'
+            if isinstance(item[0], bytes): value = str(item[0],code)
+            else: value = item[0]
+            emailbase[header] = value
+
+print('----------%d/%d----------'%(index+1,len(mails)))
+print('发信信箱:'+emailbase['From'])
+print('发信主题'+emailbase['Subject'])
+print('发信时间'+emailbase['Date'])
+server.quit()
+                
