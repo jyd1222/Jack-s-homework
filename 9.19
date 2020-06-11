@@ -1,0 +1,63 @@
+#q1
+#char,new of type String
+char=str(input('please input a character: '))
+file=open('qb.txt','r')
+file1=open('q1.txt','w')
+for i in range(34):
+    new=''
+    line=file.readline()
+    for j in range(len(line)):
+        if line[j]==' ':
+            new=new+char
+        else:
+            new=new+line[j]
+    
+    file1.write(new)
+    
+file.close()
+file1.close()
+
+a=open('qb.txt','w')
+b=open('q1.txt','r')
+for i in range(34):
+    write=b.readline()
+    a.write(write)
+a.close()
+b.close()
+        
+#q2
+#code,i, of type Integer
+#new of type String
+name=str(input('please input a name: '))
+file=open('qbdata.txt','r')
+file2=open('q2.txt','w')
+code=10000
+for i in range(34):
+    new=''
+    line=file.readline()
+    if name not in line:
+        code-=1
+        new=line
+        file2.write(str(code)+new)
+file.close()
+file2.close()
+
+#q3  
+#n,i of type Integer
+code=str(input('please input a code: '))
+file=open('q2.txt','r')
+n=0
+for i in range(33):
+    line=file.readline()
+    if code in line:
+        print(line)
+        break
+    else:
+        n+=1
+if n==33:
+    print('code does not exist')
+file.close()
+
+
+    
+    
